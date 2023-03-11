@@ -1,0 +1,24 @@
+nodejs-runtime env
+expreejs-backend framework
+mongoose-manage mongo database
+jwt- authentication
+multer- file upload
+
+
+Home Screen: The home screen of the app should have a simple and clean design with a navigation bar at the bottom. The navigation bar should have buttons for Home, Search, Friends, and Profile. On the home screen, users can see their feed, which includes posts from their friends and other users they follow.
+
+Sign Up/Sign In: When a user opens the app for the first time, they should be prompted to create an account or sign in if they already have one. The sign-up process should include fields for name, email, password, and profile picture. Once the user has created their account, they can sign in using their email and password.
+
+User Profile: Users should be able to create a profile for themselves, which includes their name, profile picture, bio, and other relevant information. The profile should also display the user's posts and a list of their friends. Users should be able to edit their profile and change their profile picture.
+
+Search for Other Users: Users should be able to search for other users by name or username. The search results should display the users' profile pictures and usernames. Users can click on a user's profile to view their profile information and posts.
+
+Adding Friends: Users should be able to add other users as friends. When a user sends a friend request, the other user should receive a notification. Once the request is accepted, both users should be able to see each other's posts and appear in each other's list of friends.
+
+Mutual Friends: Users should be able to view a list of mutual friends between them and another user. This list should include all the users who are friends of both users. This feature helps users to find common connections and expand their network.
+
+Overall, the design should be user-friendly, intuitive, and visually appealing. The app should be optimized for both mobile and desktop devices. Additionally, it is important to ensure that the app is secure and protects users' personal information.
+
+
+authentication: when youy registerand login
+autherization:to make sure soemone is logged in to perform certain actions(only logged in user can get their list of friends)
