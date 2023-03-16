@@ -80,7 +80,8 @@ const Form = () => {
               "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
             //   to remove media query and shrink the two columns of name to below by taking up the whole 4 columns space
             }}>
-                {isRegister &&
+                {isRegister && (
+
                 <>
                     <TextField
                   label="First Name"
@@ -160,8 +161,65 @@ const Form = () => {
                   </Dropzone>
                 </Box>
                 </>
-                }
-            </Box>
+            )}
+
+                <TextField
+              label="Email"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.email}
+              name="email"
+              error={Boolean(touched.email) && Boolean(errors.email)}
+              helperText={touched.email && errors.email}
+              sx={{ gridColumn: "span 4" }}
+            />
+            <TextField
+              label="Password"
+              type="password"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.password}
+              name="password"
+              error={Boolean(touched.password) && Boolean(errors.password)}
+              helperText={touched.password && errors.password}
+              sx={{ gridColumn: "span 4" }}
+            />
+            </Box> 
+
+            {/* buttons */}
+            <Box>
+            <Button
+              fullWidth
+              type="submit"
+              sx={{
+                m: "2rem 0",
+                p: "1rem",
+                backgroundColor: palette.primary.main,
+                color: palette.background.alt,
+                "&:hover": { color: palette.primary.main },
+              }}
+            >
+              {isLogin ? "LOGIN" : "REGISTER"}
+            </Button>
+            <Typography
+              onClick={() => {
+                setPageType(isLogin ? "register" : "login");
+                resetForm();
+              }}
+              sx={{
+                textDecoration: "underline",
+                color: palette.primary.main,
+                "&:hover": {
+                  cursor: "pointer",
+                  color: palette.primary.light,
+                },
+              }}
+            >
+              {isLogin
+                ? "Don't have an account? Sign Up here."
+                : "Already have an account? Login here."}
+            </Typography>
+          </Box>
         </form>
       )}
 
