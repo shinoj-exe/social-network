@@ -16,6 +16,7 @@ import { useDispatch } from 'react-redux';
 import { setLogin } from 'state';
 import Dropzone from 'react-dropzone';
 import FlexBetween from 'components/FlexBetween';
+// import { json } from 'body-parser';
 
 const registerSchema = yup.object().shape({
     firstName: yup.string().required("required"),
@@ -56,7 +57,56 @@ const Form = () => {
     const isLogin = pageType === "login";
     const isRegister = pageType === "register";
 
-    const handleFormSubmit = async(values,onsubmitProps)=>{};
+    const register = async (values,onsubmitProps)=>{
+        const formdata = new FormData() ; //we use this since we have to upload the image/picture
+        for(let value in values){
+            formdata.append(value,values[value])
+        }
+        formdata.append('picturePath',values.picture.name);
+
+        const savedUserResponse = await fetch(
+            "http://localhost:3001/auth/register",
+            {
+                method: "POST",
+                body: formdata,
+            }
+        );
+        const savedUser= savedUserResponse.json();
+        onsubmitProps.resetForm();
+        
+        if(savedUser){
+            setPageType("login");
+        }
+    };
+
+    const login = async (values,onsubmitProps)=>{
+        const loggedInResponse = await fetch(
+            "http://localhost:3001/auth/login",
+            {
+                method: "POST",
+                headers:{"Content-Type": "application/json"},
+                body: JSON.stringify(values),
+            }
+        );
+        const loggedIn= await loggedInResponse.json();
+        console.log(loggedIn);
+        onsubmitProps.resetForm();
+        
+        if(loggedIn){
+            dispatch(
+                setLogin({
+                    user: loggedIn.user,
+                    token:loggedIn.token,
+                })
+            )
+            navigate("/home")
+        }
+    };
+
+    const handleFormSubmit = async(values,onsubmitProps)=>{
+        if(isLogin) await login(values,onsubmitProps);
+        if(isRegister) await register(values,onsubmitProps);
+    };
     
   return (
     <Formik onSubmit={handleFormSubmit}

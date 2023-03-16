@@ -7,7 +7,7 @@ const HomePage = () => {
   return (
     <Box>
       <Navbar></Navbar>
-      <LoginPage></LoginPage>
+      {/* <LoginPage></LoginPage> */}
     </Box>
   )
 }
