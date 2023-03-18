@@ -73,9 +73,6 @@ const PostWidget = ({
         userPicturePath={userPicturePath}
         sameUser={sameUser}
       />
-       {
-        sameUser && <div>HELLO</div>
-        }
       <Typography color={main} sx={{ mt: "1rem" }}>
         {description}
       </Typography>
