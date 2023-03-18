@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from "react";
-
 import {
   Box,
   IconButton,
@@ -26,12 +25,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMode, setLogout } from "state";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
+// eslint-disable-next-line import/no-anonymous-default-export
+import SearchBox from 'scenes/searchBox';// eslint-disable-next-line import/no-anonymous-default-export
+// eslint-disable-next-line import/no-anonymous-default-export
 
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
+  const [searchUsers,setSearchUsers]=useState(false);
+  const [users,setUsers]=useState([]);
   const dispatch = useDispatch();
   const navigate=useNavigate();
   const user = useSelector((state)=>state.user);
+  const token = useSelector((state) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
   const theme = useTheme()
@@ -41,8 +46,22 @@ const Navbar = () => {
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
 
+
   const fullName = `${user.firstName} ${user.lastName}`;
   // const fullName ="Shinoj"
+
+  const handleSearch =async ()=>{
+    const response  = await fetch(`http://localhost:3001/users/`,
+    {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+    }
+    )
+    const data = await response.json();
+    console.log(data);
+    setUsers(data);
+    setSearchUsers(!searchUsers);
+  }
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
       <FlexBetween gap="1.75rem">
@@ -64,13 +83,16 @@ const Navbar = () => {
             gap="3rem"
             padding="0.1rem 1.5rem"
           >
-            <InputBase placeholder="Search..." />
+            <InputBase placeholder="Search..." onClick={handleSearch} />
             <IconButton>
               <Search />
             </IconButton>
           </FlexBetween>
         )}
       </FlexBetween>
+      {
+              searchUsers && <SearchBox users={users}/>
+      }
       
       {/* desktop */}
       {
