@@ -16,7 +16,7 @@ const SearchBox = ({users}) => {
           >
             <Box display="flex" justifyContent="flex-end" p="1rem">
                 {users.map((user)=>(
-                    <div>{user.firstName}</div>
+                    <div >{user.firstName}</div>
                 ))}
           </Box>
     </Box>

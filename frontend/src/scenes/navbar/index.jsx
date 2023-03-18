@@ -25,27 +25,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMode, setLogout } from "state";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
-// eslint-disable-next-line import/no-anonymous-default-export
-import SearchBox from 'scenes/searchBox';// eslint-disable-next-line import/no-anonymous-default-export
-// eslint-disable-next-line import/no-anonymous-default-export
+import WidgetWrapper from "components/WidgetWrapper";
+import UserImage from 'components/UserImage';
+import OutsideClick from 'components/OutsideClick';
 
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const [searchUsers,setSearchUsers]=useState(false);
   const [users,setUsers]=useState([]);
+  const [query,setQuery]=useState("");
   const dispatch = useDispatch();
   const navigate=useNavigate();
   const user = useSelector((state)=>state.user);
   const token = useSelector((state) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
-
+  const { palette } = useTheme();
   const theme = useTheme()
   const neutralLight = theme.palette.neutral.light;
   const dark = theme.palette.neutral.dark;
   const background = theme.palette.background.default;
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
-
+  const main = palette.neutral.main;
+    const medium = palette.neutral.medium;
 
   const fullName = `${user.firstName} ${user.lastName}`;
   // const fullName ="Shinoj"
@@ -83,7 +85,10 @@ const Navbar = () => {
             gap="3rem"
             padding="0.1rem 1.5rem"
           >
-            <InputBase placeholder="Search..." onClick={handleSearch} />
+            <InputBase placeholder="Search..." onClick={handleSearch} onChange={e=>{
+              setQuery(e.target.value); 
+
+              }} />
             <IconButton>
               <Search />
             </IconButton>
@@ -91,7 +96,58 @@ const Navbar = () => {
         )}
       </FlexBetween>
       {
-              searchUsers && <SearchBox users={users}/>
+        searchUsers &&<OutsideClick onClickOutside={()=>{setSearchUsers(!searchUsers)}}>
+        <Box position="absolute"
+          right="50%"
+          top="10%"
+          zIndex="10"
+          maxWidth="600px"
+          minWidth="400px"
+          backgroundColor={neutralLight}
+          sx={{
+            padding:"1.5rem 1.5rem 0.75rem 1.5rem",
+            borderRadius:"0.75rem",
+            maxHeight:"500px",
+            overflowY:"scroll",
+            scrollbarWidth: "thin",
+            scrollbarColor: "hsl(0 0% 50%)",
+            
+          }}
+          >
+            <Box display="flex" flexDirection="column" gap="1.5rem">
+                {users.filter(user=>user.firstName.toLowerCase().includes(query)).map((user)=>(
+                    <FlexBetween>
+                      <FlexBetween gap="1rem">
+                      <UserImage image={user.picturePath} size="55px" />
+                      <Box
+                        onClick={() => {
+                          navigate(`/profile/${user._id}`);
+                          navigate(0);
+                        }}
+                      >
+                        <Typography
+                          color={main}
+                          variant="h5"
+                          fontWeight="500"
+                          sx={{
+                            "&:hover": {
+                              color: palette.primary.light,
+                              cursor: "pointer",
+                            },
+                          }}
+                        >
+                          {user.firstName}{user.lastName}
+                        </Typography>
+                        <Typography color={medium} fontSize="0.75rem">
+                          {user.occupation}
+                        </Typography>
+                      </Box>
+                    </FlexBetween>
+                  </FlexBetween>
+                ))}
+            </Box>
+        </Box>
+        </OutsideClick>
       }
       
       {/* desktop */}
