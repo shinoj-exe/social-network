@@ -28,12 +28,18 @@ import FlexBetween from "components/FlexBetween";
 import WidgetWrapper from "components/WidgetWrapper";
 import UserImage from 'components/UserImage';
 import OutsideClick from 'components/OutsideClick';
+import NotificationPanel from 'scenes/notificationPanel';
 
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const [searchUsers,setSearchUsers]=useState(false);
   const [users,setUsers]=useState([]);
   const [query,setQuery]=useState("");
+
+  const [messageNotification,setMessageNotification]=useState(false);
+  const [bellNotification,setBellNotification]=useState(false);
+  const [helpNotification,setHelpNotification]=useState(false);
+
   const dispatch = useDispatch();
   const navigate=useNavigate();
   const user = useSelector((state)=>state.user);
@@ -107,10 +113,11 @@ const Navbar = () => {
           sx={{
             padding:"1.5rem 1.5rem 0.75rem 1.5rem",
             borderRadius:"0.75rem",
-            maxHeight:"500px",
+            maxHeight:"480px",
             overflowY:"scroll",
-            scrollbarWidth: "thin",
-            scrollbarColor: "hsl(0 0% 50%)",
+            // scrollbarWidth: "1px",
+            // scrollbarColor: "hsl(0 0% 50%)",
+            boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"
             
           }}
           >
@@ -149,6 +156,74 @@ const Navbar = () => {
         </Box>
         </OutsideClick>
       }
+      {
+        messageNotification && 
+        <OutsideClick onClickOutside={()=>{setMessageNotification(!messageNotification)}}>
+          <Box position="fixed"
+          right="50px"
+          top="10%"
+          zIndex="10"
+          maxWidth="600px"
+          minWidth="500px"
+          minHeight="100px"
+          backgroundColor={neutralLight}
+          sx={{
+            padding:"1.5rem 1.5rem 0.75rem 1.5rem",
+            borderRadius:"0.75rem",
+            maxHeight:"480px",
+            boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"
+            
+          }}>
+            <NotificationPanel subtitle={"No new messages!"}/>
+          </Box>
+        </OutsideClick>
+      }
+      {
+        bellNotification &&
+        <OutsideClick onClickOutside={()=>{setBellNotification(!bellNotification)}}>
+          <Box position="fixed"
+          right="40px"
+          top="10%"
+          zIndex="10"
+          maxWidth="600px"
+          minWidth="500px"
+          minHeight="100px"
+          backgroundColor={neutralLight}
+          sx={{
+            padding:"1.5rem 1.5rem 0.75rem 1.5rem",
+            borderRadius:"0.75rem",
+            maxHeight:"480px",
+            boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"
+            
+          }}>
+            <NotificationPanel subtitle={"No new Notifications!"}/>
+          </Box>
+        </OutsideClick>
+
+      }
+      {
+        helpNotification &&
+        <OutsideClick onClickOutside={()=>{setHelpNotification(!helpNotification)}}>
+          <Box position="fixed"
+          right="30px"
+          top="10%"
+          zIndex="10"
+          maxWidth="600px"
+          minWidth="500px"
+          minHeight="100px"
+          backgroundColor={neutralLight}
+          sx={{
+            padding:"1.5rem 1.5rem 0.75rem 1.5rem",
+            borderRadius:"0.75rem",
+            maxHeight:"480px",
+            boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"
+            
+          }}>
+            <NotificationPanel subtitle={"Please email your concerns to shinojmuralee@gmail.com"}/>
+          </Box>
+        </OutsideClick>
+      }
+
       
       {/* desktop */}
       {
@@ -161,9 +236,9 @@ const Navbar = () => {
               <LightMode sx={{ color: dark, fontSize: "25px" }} />
             )}
           </IconButton>
-          <Message sx={{ fontSize: "25px" }} />
-          <Notifications sx={{ fontSize: "25px" }} />
-          <Help sx={{ fontSize: "25px" }} />
+          <Message sx={{ fontSize: "25px" ,cursor:"Pointer"} } onClick={()=>{setMessageNotification(!messageNotification)}} />
+          <Notifications sx={{ fontSize: "25px" ,cursor:"Pointer"} } onClick={()=>{setBellNotification(!bellNotification)}} />
+          <Help sx={{ fontSize: "25px",cursor:"Pointer" } } onClick={()=>{setHelpNotification(!helpNotification)}} />
           <FormControl variant='standard' value={fullName}>
             <Select value={fullName}
               sx={{
@@ -192,7 +267,7 @@ const Navbar = () => {
           <Menu/>
         </IconButton>)
       }
-
+      
       {/* mobile */}
       {
         !isNonMobileScreens && isMobileMenuToggled && (
