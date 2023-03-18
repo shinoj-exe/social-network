@@ -15,7 +15,9 @@ const PostsWidget = ({userId,isProfile=false}) => {
             headers:{Authorization:`Bearer ${token}`},
         })
         const data = await response.json();
-        dispatch(setPosts({posts:data}))
+        const posts = await data.reverse();
+        console.log(posts);
+        dispatch(setPosts({posts:posts}))
     }
 
     const getUserPosts = async()=>{
@@ -24,7 +26,9 @@ const PostsWidget = ({userId,isProfile=false}) => {
             headers:{Authorization:`Bearer ${token}`},
         })
         const data = await response.json();
-        dispatch(setPosts({posts:data}))
+        const posts = await data.reverse();
+        console.log(posts);
+        dispatch(setPosts({posts:posts}))
     }
 
     useEffect(()=>{
@@ -34,6 +38,7 @@ const PostsWidget = ({userId,isProfile=false}) => {
             getPosts();
         }
     },[]);
+    // const revPosts= posts.reverse();
 
   return (
     <>

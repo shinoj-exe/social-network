@@ -38,6 +38,7 @@ const MyPostWidget = ({picturePath}) => {
     const medium = palette.neutral.medium;
 
     const handlePost= async()=>{
+
         const formData= new FormData();
         formData.append("userId",_id)
         formData.append("description",post);
@@ -51,8 +52,12 @@ const MyPostWidget = ({picturePath}) => {
             headers:{Authorization:`Bearer ${token}`},
             body: formData,
         })
-        const posts = await response.json()
-        dispatch(setPosts({posts}));
+        // const posts = await response.json()
+        // dispatch(setPosts({posts}));
+        const data = await response.json();
+        const posts = await data.reverse();
+        // console.log(posts);
+        dispatch(setPosts({posts:posts}))
         setImage(null);
         setPost("")
     }
