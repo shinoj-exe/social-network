@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     ChatBubbleOutlineOutlined,
     FavoriteBorderOutlined,
@@ -30,6 +30,7 @@ const PostWidget = ({
     comments,
   }) => {
     const [isComments, setIsComments] = useState(false);
+    const [sameUser,setSameUser]=useState(false)
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id);
@@ -53,14 +54,28 @@ const PostWidget = ({
       dispatch(setPost({ post: updatedPost }));
   }
 
+  const setuser = ()=>{
+    if(postUserId===loggedInUserId){
+        setSameUser(!sameUser)
+    }
+  }
+  useEffect(() => {
+    setuser();
+  }, [])
+  
   return (
     <WidgetWrapper m="2rem 0">
+       
         <Friend
         friendId={postUserId}
         name={name}
         subtitle={location}
         userPicturePath={userPicturePath}
+        sameUser={sameUser}
       />
+       {
+        sameUser && <div>HELLO</div>
+        }
       <Typography color={main} sx={{ mt: "1rem" }}>
         {description}
       </Typography>
