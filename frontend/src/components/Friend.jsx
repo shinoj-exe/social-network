@@ -20,7 +20,8 @@ const Friend = ({friendId,name,subtitle,userPicturePath}) => {
     const main = palette.neutral.main;
     const medium = palette.neutral.medium;
     
-    const isFriend=friends.find((friend)=>{friend._id===friendId})//to show the add or remove friend option
+    const isFriend=friends.find((friend)=>friend._id===friendId)
+    //to show the add or remove friend option
 
     const patchFriend=async ()=>{
         const response = await fetch(`http://localhost:3001/users/${_id}/${friendId}`,{
@@ -38,7 +39,8 @@ const Friend = ({friendId,name,subtitle,userPicturePath}) => {
         <Box
           onClick={() => {
             navigate(`/profile/${friendId}`);
-            navigate(0); //on going to user and if we try to go to another person profile page, the components dont rerender, so we have to manualy refresh the page
+            navigate(0);
+             //on going to user and if we try to go to another person profile page, the components dont rerender, so we have to manualy refresh the page
           }}
         >
           <Typography
