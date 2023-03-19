@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, useMediaQuery,Typography } from "@mui/material";
+import { Box, useMediaQuery,Typography,useTheme} from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -8,7 +8,9 @@ import FriendListWidget from "scenes/widgets/FriendListWidget";
 import MyPostWidget from "scenes/widgets/MyPostWidget";
 import PostsWidget from "scenes/widgets/PostsWidget";
 import UserWidget from "scenes/widgets/UserWidget";
-
+import FlexBetween from "components/FlexBetween";
+import UserImage from 'components/UserImage';
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -18,6 +20,10 @@ const ProfilePage = () => {
   const { userId } = useParams();
   const token = useSelector((state) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
+  const { palette } = useTheme();
+  const main = palette.neutral.main;
+    const medium = palette.neutral.medium;
+  const navigate=useNavigate();
    
   const loggedInUserId = useSelector((state) => state.user._id);
 
@@ -99,11 +105,42 @@ const ProfilePage = () => {
         </Box>
 
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-          <Typography>Mutual Friends</Typography>
+          <Typography color={palette.neutral.dark}
+        variant="h5"
+        fontWeight="500"
+        sx={{ mb: "1.5rem" }}>Mutual Friends</Typography>
           {
             mutualFriends.map((friend)=>(
               <div>
-                <div>{friend.firstName}</div>
+                {/* <div>{friend.firstName}</div> */}
+                <FlexBetween>
+                      <FlexBetween gap="1rem">
+                      <UserImage image={friend.picturePath} size="55px" />
+                      <Box
+                        onClick={() => {
+                          navigate(`/profile/${friend._id}`);
+                          navigate(0);
+                        }}
+                      >
+                        <Typography
+                          color={main}
+                          variant="h5"
+                          fontWeight="500"
+                          sx={{
+                            "&:hover": {
+                              color: palette.primary.light,
+                              cursor: "pointer",
+                            },
+                          }}
+                        >
+                          {friend.firstName}{friend.lastName}
+                        </Typography>
+                        <Typography color={medium} fontSize="0.75rem">
+                          {friend.occupation}
+                        </Typography>
+                      </Box>
+                    </FlexBetween>
+                  </FlexBetween>
               </div>
             ))
           }
