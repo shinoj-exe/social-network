@@ -52,6 +52,8 @@ const Navbar = () => {
   const background = theme.palette.background.default;
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
+
+
   const main = palette.neutral.main;
     const medium = palette.neutral.medium;
 
