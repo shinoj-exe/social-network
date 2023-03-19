@@ -1,4 +1,4 @@
-# social-network
+# Social-network
 This is a mini social network web application created using the MERN stack, which stands for MongoDB, Express, React, and Node.js. This app allows users to sign up or sign in, create their profile, search for other users, view other users' profiles, and make them friends or unfriend them.
 
 ## Features
