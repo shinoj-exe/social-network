@@ -1,7 +1,7 @@
 # social-network
 This is a mini social network web application created using the MERN stack, which stands for MongoDB, Express, React, and Node.js. This app allows users to sign up or sign in, create their profile, search for other users, view other users' profiles, and make them friends or unfriend them.
 
-##Features
+## Features
 The following are the features that have been implemented in this mini social network app:
 
 -**Sign up/sign in**: Users can sign up for a new account or sign in with an existing account. Passwords are securely hashed before being stored in the database.
@@ -21,7 +21,7 @@ The following are the features that have been implemented in this mini social ne
 -**Update posts**: Likes for each posts are counted separately and displayed and it is kept track of which users have liked the posts already.
 
 
-##Dependencies
+## Dependencies
 The following are the major dependencies that have been used in this project:
 
 -**React JS**: A JavaScript library used for building user interfaces.
