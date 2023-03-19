@@ -85,3 +85,9 @@ The following are the major dependencies that have been used in this project:
 ```bash
   cd frontend && npm start
 ```
+
+## Extended Features
+
+
+### Login Page
+![App Screenshot](https://github.com/shinoj-exe/social-network/blob/master/Screenshots/login.png?raw=true)
