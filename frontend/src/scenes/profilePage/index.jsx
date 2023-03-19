@@ -34,7 +34,7 @@ const ProfilePage = () => {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     setUser(data);
     setUserFriends(data.friends);
   };
@@ -47,7 +47,7 @@ const ProfilePage = () => {
     }
     )
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     setLoggedinUserFriends(data);
   } 
 
@@ -61,7 +61,7 @@ const ProfilePage = () => {
             // console.log(friend);
             mutuallist.push(loggedinFriends);
             // setMutualFriends([...mutualFriends,friend])
-            console.log(mutuallist);
+            // console.log(mutuallist);
           }
         })
       })

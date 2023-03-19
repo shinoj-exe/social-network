@@ -16,7 +16,7 @@ const PostsWidget = ({userId,isProfile=false}) => {
         })
         const data = await response.json();
         const posts = await data.reverse();
-        console.log(posts);
+        // console.log(posts);
         dispatch(setPosts({posts:posts}))
     }
 
@@ -27,7 +27,7 @@ const PostsWidget = ({userId,isProfile=false}) => {
         })
         const data = await response.json();
         const posts = await data.reverse();
-        console.log(posts);
+        // console.log(posts);
         dispatch(setPosts({posts:posts}))
     }
 
