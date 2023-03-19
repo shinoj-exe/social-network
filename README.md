@@ -91,3 +91,22 @@ The following are the major dependencies that have been used in this project:
 
 ### Login Page
 ![App Screenshot](https://github.com/shinoj-exe/social-network/blob/master/Screenshots/login.png?raw=true)
+
+### Signup Page
+![App Screenshot](https://github.com/shinoj-exe/social-network/blob/master/Screenshots/signup.png?raw=true)
+
+### Logout Page
+![App Screenshot](https://github.com/shinoj-exe/social-network/blob/master/Screenshots/logout.png?raw=true)
+
+
+### Home Page with Add/Remove Friends
+![App Screenshot](https://github.com/shinoj-exe/social-network/blob/master/Screenshots/homepage.png?raw=true)
+
+### User Search functionality
+![App Screenshot](https://github.com/shinoj-exe/social-network/blob/master/Screenshots/search_functionality.png?raw=true)
+
+### User Profile with Mutual Friends Feature
+![App Screenshot](https://github.com/shinoj-exe/social-network/blob/master/Screenshots/userProfile_mutual.png?raw=true)
+
+### Add posts
+![App Screenshot](https://github.com/shinoj-exe/social-network/blob/master/Screenshots/add_new_posts.png?raw=true)
