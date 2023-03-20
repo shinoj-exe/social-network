@@ -1,4 +1,15 @@
 # Social-network
+
+## Challenge
+
+Create a mini social network. The application should have features like:-
+* Users should be able to sign up/sign in, and create a profile for themselves.
+* Search for other users.
+* View other users' profiles & make them friends/unfriend them.
+*  View a list of mutual friends between users. A mutual friend is a user who is a friend of two other users who may or may not know each other. 
+
+## Social-network
+
 This is a mini social network web application created using the MERN stack, which stands for MongoDB, Express, React, and Node.js. This app allows users to sign up or sign in, create their profile, search for other users, view other users' profiles, and make them friends or unfriend them.
 
 ## Features
@@ -88,7 +99,10 @@ The following are the major dependencies that have been used in this project:
 
 ## Working Demo
 
-https://user-images.githubusercontent.com/76904393/226409214-10f3f4da-0212-40d6-b949-1f2a372d5e6e.mp4
+[Working Demo](https://www.loom.com/share/3eb9d8bb33d740fc97446964c40df341)
+
+https://user-images.githubusercontent.com/76904393/226411140-7c2fdc7c-adf7-418f-b31e-441d0833a21b.mp4
+
 
 
 ## Extended Features
