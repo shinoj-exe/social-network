@@ -17,6 +17,8 @@ const ProfilePage = () => {
   const [loggedinUserFriends,setLoggedinUserFriends]= useState([]);
   const [mutualFriends,setMutualFriends]=useState([]);
   const [userFriends,setUserFriends]=useState([]);
+  const [sameUser,setSameUser]=useState(false)
+
   const { userId } = useParams();
   const token = useSelector((state) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
@@ -27,6 +29,11 @@ const ProfilePage = () => {
    
   const loggedInUserId = useSelector((state) => state.user._id);
 
+  const checkSame = ()=>{
+    if(userId===loggedInUserId){
+        setSameUser(!sameUser)
+    }
+  }
 
   const getUser = async () => {
     const response = await fetch(`http://localhost:3001/users/${userId}`, {
@@ -75,6 +82,7 @@ const ProfilePage = () => {
   
   useEffect(()=>{
     checkMutual();
+    checkSame();
   },[user,loggedinUserFriends]) // eslint-disable-line react-hooks/exhaustive-deps
 
 
@@ -103,48 +111,51 @@ const ProfilePage = () => {
           <Box m="2rem 0" />
           <PostsWidget userId={userId} isProfile />
         </Box>
-
-        <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-          <Typography color={palette.neutral.dark}
-        variant="h5"
-        fontWeight="500"
-        sx={{ mb: "1.5rem" }}>Mutual Friends</Typography>
-          {
-            mutualFriends.map((friend)=>(
-              <div>
-                {/* <div>{friend.firstName}</div> */}
-                <FlexBetween>
-                      <FlexBetween gap="1rem">
-                      <UserImage image={friend.picturePath} size="55px" />
-                      <Box
-                        onClick={() => {
-                          navigate(`/profile/${friend._id}`);
-                          navigate(0);
-                        }}
-                      >
-                        <Typography
-                          color={main}
-                          variant="h5"
-                          fontWeight="500"
-                          sx={{
-                            "&:hover": {
-                              color: palette.primary.light,
-                              cursor: "pointer",
-                            },
+        
+        {
+          !sameUser && 
+          <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
+            <Typography color={palette.neutral.dark}
+          variant="h5"
+          fontWeight="500"
+          sx={{ mb: "1.5rem" }}>Mutual Friends</Typography>
+            {
+              mutualFriends.map((friend)=>(
+                <Box sx={{ mb: "1.5rem" }}>
+                  {/* <div>{friend.firstName}</div> */}
+                  <FlexBetween>
+                        <FlexBetween gap="1rem">
+                        <UserImage image={friend.picturePath} size="55px" />
+                        <Box
+                          onClick={() => {
+                            navigate(`/profile/${friend._id}`);
+                            navigate(0);
                           }}
                         >
-                          {friend.firstName}{friend.lastName}
-                        </Typography>
-                        <Typography color={medium} fontSize="0.75rem">
-                          {friend.occupation}
-                        </Typography>
-                      </Box>
+                          <Typography
+                            color={main}
+                            variant="h5"
+                            fontWeight="500"
+                            sx={{
+                              "&:hover": {
+                                color: palette.primary.light,
+                                cursor: "pointer",
+                              },
+                            }}
+                          >
+                            {friend.firstName}{friend.lastName}
+                          </Typography>
+                          <Typography color={medium} fontSize="0.75rem">
+                            {friend.occupation}
+                          </Typography>
+                        </Box>
+                      </FlexBetween>
                     </FlexBetween>
-                  </FlexBetween>
-              </div>
-            ))
-          }
-        </Box>
+                </Box>
+              ))
+            }
+          </Box>
+        }
       </Box>
     </Box>
   )
